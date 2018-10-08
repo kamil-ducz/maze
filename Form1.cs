@@ -141,7 +141,7 @@ namespace labyrinth
 
             //define starting point
             //create drawing point for solver position
-            Solver mySolver = new Solver(bricks[startingBrickIndex].x, bricks[startingBrickIndex].y, "E");
+            Solver mySolver = new Solver(bricks[startingBrickIndex].x, bricks[startingBrickIndex].y, Direction.North + 3);
             Rectangle recti = new Rectangle(1, 40, 1, 1); //for solver position
             recti.X = mySolver.x;
             recti.Y = mySolver.y;
@@ -170,7 +170,7 @@ namespace labyrinth
             while (currentBrickIndex != exitBrickIndex)
             {
                 //1 facing north cases
-                if ((bricks[currentBrickIndex].rightWall == true || bricks[currentBrickIndex].leftWall == true) && bricks[currentBrickIndex].upperWall == false && mySolver.facingAt == "N" && bricks[currentBrickIndex - 5].rightWall == true)
+                if ((bricks[currentBrickIndex].rightWall == true || bricks[currentBrickIndex].leftWall == true) && bricks[currentBrickIndex].upperWall == false && mySolver.facingAt == Direction.North && bricks[currentBrickIndex - 5].rightWall == true)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -181,10 +181,10 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "N";
+                    mySolver.facingAt = Direction.North;
                 }
 
-                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == false && mySolver.facingAt == "N" && bricks[currentBrickIndex - 5].rightWall == false && bricks[currentBrickIndex + 1].upperWall == false)
+                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == false && mySolver.facingAt == Direction.North && bricks[currentBrickIndex - 5].rightWall == false && bricks[currentBrickIndex + 1].upperWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -195,10 +195,10 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "S";
+                    mySolver.facingAt = Direction.South;
                 }
 
-                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == false && mySolver.facingAt == "N" && bricks[currentBrickIndex - 5].rightWall == false)
+                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == false && mySolver.facingAt == Direction.North && bricks[currentBrickIndex - 5].rightWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -209,28 +209,28 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "E";
+                    mySolver.facingAt = Direction.East;
                 }
 
-                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && mySolver.facingAt == "N")
+                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && mySolver.facingAt == Direction.North)
                 {
-                    mySolver.facingAt = "S";
+                    mySolver.facingAt = Direction.South;
                 }
-                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == "N")
+                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == Direction.North)
                 {
-                    mySolver.facingAt = "W";
+                    mySolver.facingAt = Direction.West;
                 }
-                else if (bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == false && bricks[currentBrickIndex].rightWall == false && mySolver.facingAt == "N")
+                else if (bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == false && bricks[currentBrickIndex].rightWall == false && mySolver.facingAt == Direction.North)
                 {
-                    mySolver.facingAt = "W";
+                    mySolver.facingAt = Direction.West;
                 }
-                else if (bricks[currentBrickIndex].rightWall == false && bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == "N")
+                else if (bricks[currentBrickIndex].rightWall == false && bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == Direction.North)
                 {
-                    mySolver.facingAt = "S";
+                    mySolver.facingAt = Direction.South;
                 }
-                else if (bricks[currentBrickIndex].rightWall == false && bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == "N")
+                else if (bricks[currentBrickIndex].rightWall == false && bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == Direction.North)
                 {
-                    mySolver.facingAt = "S";
+                    mySolver.facingAt = Direction.South;
                 }
 
                 if (currentBrickIndex == exitBrickIndex)
@@ -242,7 +242,7 @@ namespace labyrinth
                 }
 
                 //facing south cases
-                if ((bricks[currentBrickIndex].leftWall || bricks[currentBrickIndex].rightWall == true) && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == "S" && bricks[currentBrickIndex + 5].leftWall == true)
+                if ((bricks[currentBrickIndex].leftWall || bricks[currentBrickIndex].rightWall == true) && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == Direction.South && bricks[currentBrickIndex + 5].leftWall == true)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -253,9 +253,9 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "S";
+                    mySolver.facingAt = Direction.South;
                 }
-                else if ((bricks[currentBrickIndex].leftWall || bricks[currentBrickIndex].rightWall == true) && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == "S" && bricks[currentBrickIndex + 5].leftWall == false && bricks[currentBrickIndex - 1].bottomWall == false)
+                else if ((bricks[currentBrickIndex].leftWall || bricks[currentBrickIndex].rightWall == true) && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == Direction.South && bricks[currentBrickIndex + 5].leftWall == false && bricks[currentBrickIndex - 1].bottomWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -266,9 +266,9 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "N";
+                    mySolver.facingAt = Direction.North;
                 }
-                else if ((bricks[currentBrickIndex].leftWall || bricks[currentBrickIndex].rightWall == true) && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == "S" && bricks[currentBrickIndex + 5].leftWall == false)
+                else if ((bricks[currentBrickIndex].leftWall || bricks[currentBrickIndex].rightWall == true) && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == Direction.South && bricks[currentBrickIndex + 5].leftWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -279,20 +279,20 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "N";
+                    mySolver.facingAt = Direction.North;
                 }
 
-                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == true && mySolver.facingAt == "S")
+                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == true && mySolver.facingAt == Direction.South)
                 {
-                    mySolver.facingAt = "N";
+                    mySolver.facingAt = Direction.North;
                 }
-                else if (bricks[currentBrickIndex].rightWall == false && bricks[currentBrickIndex].upperWall == false && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == true && mySolver.facingAt == "S")
+                else if (bricks[currentBrickIndex].rightWall == false && bricks[currentBrickIndex].upperWall == false && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == true && mySolver.facingAt == Direction.South)
                 {
-                    mySolver.facingAt = "E";
+                    mySolver.facingAt = Direction.East;
                 }
-                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == false && bricks[currentBrickIndex].leftWall == false && bricks[currentBrickIndex].bottomWall == true && mySolver.facingAt == "S")
+                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].upperWall == false && bricks[currentBrickIndex].leftWall == false && bricks[currentBrickIndex].bottomWall == true && mySolver.facingAt == Direction.South)
                 {
-                    mySolver.facingAt = "E";
+                    mySolver.facingAt = Direction.East;
                 }
 
                 if (currentBrickIndex == exitBrickIndex)
@@ -304,7 +304,7 @@ namespace labyrinth
                 }
 
                 //facing east cases
-                if ((bricks[currentBrickIndex].bottomWall == true || bricks[currentBrickIndex].upperWall == true) && bricks[currentBrickIndex].rightWall == false && mySolver.facingAt == "E" && bricks[currentBrickIndex + 1].bottomWall == true)
+                if ((bricks[currentBrickIndex].bottomWall == true || bricks[currentBrickIndex].upperWall == true) && bricks[currentBrickIndex].rightWall == false && mySolver.facingAt == Direction.East && bricks[currentBrickIndex + 1].bottomWall == true)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -315,9 +315,9 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "S";
+                    mySolver.facingAt = Direction.South;
                 }
-                else if ((bricks[currentBrickIndex].bottomWall == true || bricks[currentBrickIndex].upperWall == true) && bricks[currentBrickIndex].rightWall == false && mySolver.facingAt == "E" && bricks[currentBrickIndex + 1].bottomWall == false && bricks[currentBrickIndex + 6].leftWall == false)
+                else if ((bricks[currentBrickIndex].bottomWall == true || bricks[currentBrickIndex].upperWall == true) && bricks[currentBrickIndex].rightWall == false && mySolver.facingAt == Direction.East && bricks[currentBrickIndex + 1].bottomWall == false && bricks[currentBrickIndex + 6].leftWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -328,10 +328,10 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "W";
+                    mySolver.facingAt = Direction.West;
                 }
 
-                else if ((bricks[currentBrickIndex].bottomWall == true || bricks[currentBrickIndex].upperWall == true) && bricks[currentBrickIndex].rightWall == false && mySolver.facingAt == "E" && bricks[currentBrickIndex + 1].bottomWall == false)
+                else if ((bricks[currentBrickIndex].bottomWall == true || bricks[currentBrickIndex].upperWall == true) && bricks[currentBrickIndex].rightWall == false && mySolver.facingAt == Direction.East && bricks[currentBrickIndex + 1].bottomWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -342,19 +342,19 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "S";
+                    mySolver.facingAt = Direction.South;
                 }
-                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].bottomWall == true && bricks[currentBrickIndex].upperWall == true && mySolver.facingAt == "E")
+                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].bottomWall == true && bricks[currentBrickIndex].upperWall == true && mySolver.facingAt == Direction.East)
                 {
-                    mySolver.facingAt = "E";
+                    mySolver.facingAt = Direction.East;
                 }
-                else if (bricks[currentBrickIndex].rightWall == false && bricks[currentBrickIndex].bottomWall == false && bricks[currentBrickIndex].upperWall == false && bricks[currentBrickIndex].leftWall == true && mySolver.facingAt == "E")
+                else if (bricks[currentBrickIndex].rightWall == false && bricks[currentBrickIndex].bottomWall == false && bricks[currentBrickIndex].upperWall == false && bricks[currentBrickIndex].leftWall == true && mySolver.facingAt == Direction.East)
                 {
-                    mySolver.facingAt = "N";
+                    mySolver.facingAt = Direction.North;
                 }
-                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].bottomWall == true && bricks[currentBrickIndex].upperWall == false && mySolver.facingAt == "E")
+                else if (bricks[currentBrickIndex].rightWall == true && bricks[currentBrickIndex].bottomWall == true && bricks[currentBrickIndex].upperWall == false && mySolver.facingAt == Direction.East)
                 {
-                    mySolver.facingAt = "N";
+                    mySolver.facingAt = Direction.North;
                 }
 
                 if (currentBrickIndex == exitBrickIndex)
@@ -367,7 +367,7 @@ namespace labyrinth
 
 
                 //facing west cases
-                if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == "W" && bricks[currentBrickIndex - 1].upperWall == true)
+                if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == Direction.West && bricks[currentBrickIndex - 1].upperWall == true)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -378,9 +378,9 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "W";
+                    mySolver.facingAt = Direction.West;
                 }
-                else if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == "W" && bricks[currentBrickIndex - 1].upperWall == false && bricks[currentBrickIndex -6].rightWall == false)
+                else if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == Direction.West && bricks[currentBrickIndex - 1].upperWall == false && bricks[currentBrickIndex -6].rightWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -391,9 +391,9 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "N";
+                    mySolver.facingAt = Direction.North;
                 }
-                else if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == "W" && bricks[currentBrickIndex - 1].upperWall == false)
+                else if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == Direction.West && bricks[currentBrickIndex - 1].upperWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -404,15 +404,15 @@ namespace labyrinth
                     recti.X = mySolver.x;
                     recti.Y = mySolver.y;
                     gObject.DrawEllipse(blackPen, recti);
-                    mySolver.facingAt = "N";
+                    mySolver.facingAt = Direction.North;
                 }
-                else if (bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == true && mySolver.facingAt == "W")
+                else if (bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == true && mySolver.facingAt == Direction.West)
                 {
-                    mySolver.facingAt = "E";
+                    mySolver.facingAt = Direction.East;
                 }
-                else if (bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == "W")
+                else if (bricks[currentBrickIndex].upperWall == true && bricks[currentBrickIndex].leftWall == true && bricks[currentBrickIndex].bottomWall == false && mySolver.facingAt == Direction.West)
                 {
-                    mySolver.facingAt = "S";
+                    mySolver.facingAt = Direction.South;
                 }
 
                 if (currentBrickIndex == exitBrickIndex)

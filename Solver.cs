@@ -1,7 +1,6 @@
-﻿//TODO public enum facingAt instead 'str facing,At'
-//{ N, W, S, E };
+﻿using System;
 
-using System;
+public enum Direction { North, West, South, East };
 
 namespace labyrinth
 {
@@ -14,7 +13,9 @@ namespace labyrinth
         public bool isWallInFront = false; //sensor detecting wall in front of object
         public int x;
         public int y;
-        public string facingAt = "N";
+        //public string facingAt = Direction.North;
+        public Direction facingAt = Direction.North;
+
 
         public Solver(int x, int y)
         {
@@ -22,38 +23,39 @@ namespace labyrinth
             this.y = y;
         }
 
-        public Solver(int x, int y, string direction)
+        public Solver(int x, int y, Direction direction)
         {
             this.x = x;
             this.y = y;
             this.facingAt = direction;
         }
 
-        public void turnLeft()
-        {
-            switch (this.facingAt)
-            {
-                case "N": this.facingAt = "W"; break;
-                case "W": this.facingAt = "S"; break;
-                case "S": this.facingAt = "E"; break;
-                case "E": this.facingAt = "N"; break;
-                default: throw new Exception();
-            }
+        //TODO fill turnLeft and checkRigthWall
+        //public void turnLeft()
+        //{
+        //    switch (this.facingAt)
+        //    {
+        //        case Direction.North: this.facingAt = Direction.West; break;
+        //        case Direction.West: this.facingAt = Direction.South; break;
+        //        case Direction.South: this.facingAt = Direction.East; break;
+        //        case Direction.East: this.facingAt = Direction.North; break;
+        //        default: throw new Exception();
+        //    }
 
-        }
+        //}
 
         /// <summary>
         ///check if there is a wall on the right
         /// </summary>
-        public bool checkRightWall(Brick brick)
-        {
-            //this.x = brick.x;
-            //this.y = brick.y;
+        //public bool checkRightWall(Brick brick)
+        //{
+        //    //this.x = brick.x;
+        //    //this.y = brick.y;
 
-            if (this.facingAt == "N" && brick.rightWall == true)
-                return true;
-            return false;
-        }
+        //    if (this.facingAt == Direction.North && brick.rightWall == true)
+        //        return true;
+        //    return false;
+        //}
 
     }
 }
