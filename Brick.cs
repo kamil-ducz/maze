@@ -17,7 +17,6 @@ namespace labyrinth
         public bool bottomWall = false;
         public bool leftWall = false;
         public bool rightWall = false;
-        public bool isCurrent = false; //is this brick currently visited or starting point?
 
         public Brick(int x, int y)
         {

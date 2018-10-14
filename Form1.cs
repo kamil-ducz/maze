@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -13,39 +8,38 @@ namespace labyrinth
 {
     public partial class Form1 : Form
     {
+        //you can only make references here
+        List<Brick> bricks;
+        Graphics gObject;
+        Brush black;
+        Brush white;
+        Pen blackPen;
+        Pen whitePen;
 
+        //declare vars for exit and start indexes
+        int exitBrickIndex ;
+        int startingBrickIndex;
+
+        async Task PutTaskDelay()
+        {
+            await Task.Delay(500);
+        }
 
         public Form1()
         {
             InitializeComponent();
-
-
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        async private void Form1_Load(object sender, EventArgs e)
         {
-
-        }
-
-        private void DrawImagePointF(PaintEventArgs e)
-        {
-
-        }
-
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-            List<Brick> bricks = new List<Brick>();
+            await PutTaskDelay();
+            bricks = new List<Brick>();
             mazeTrace.ResetText();
-            Graphics gObject = canvas.CreateGraphics();
-            Brush black = new SolidBrush(Color.Black);
-            Brush white = new SolidBrush(Color.White);
-            Pen blackPen = new Pen(black, 4);
-            Pen whitePen = new Pen(white, 4);
+            gObject = canvas.CreateGraphics();
+            black = new SolidBrush(Color.Black);
+            white = new SolidBrush(Color.White);
+            blackPen = new Pen(black, 4);
+            whitePen = new Pen(white, 4);
 
             int line = 0;
             int column = 1;
@@ -58,10 +52,8 @@ namespace labyrinth
                 }
                 bricks.Add(new Brick((80 * column), 80 * line));
 
-
                 //define logic of bricks for borders of maze
                 //draw borders of maze
-
                 if (i >= 0 && i <= 4)
                 {
                     bricks[i].upperWall = true;
@@ -85,6 +77,7 @@ namespace labyrinth
 
                 column++;
             }
+
 
             mazeTrace.AppendText("Generating maze...\n");
             //manually define brick walls inside maze
@@ -112,7 +105,6 @@ namespace labyrinth
 
             bricks[20].rightWall = true;
 
-
             bricks[22].rightWall = true;
             bricks[23].rightWall = true;
             bricks[23].leftWall = true;
@@ -132,12 +124,16 @@ namespace labyrinth
                     gObject.DrawLine(blackPen, bricks[i].x - 40, bricks[i].y + 40, bricks[i].x + 40, bricks[i].y + 40);
             }
 
-            //draw and define exit, define starting point
+            //draw exit
             gObject.DrawLine(whitePen, bricks[21].x - 15, bricks[21].y + 40, bricks[21].x + 15, bricks[21].y + 40);
-            int exitBrickIndex = 21;
-            int startingBrickIndex = 7;
 
+        }
 
+        private async void solveMazeButton_Click(object sender, EventArgs e)
+        {
+            //define exit and starting points
+            exitBrickIndex = 21;
+            startingBrickIndex = 7;
 
             //define starting point
             //create drawing point for solver position
@@ -149,8 +145,6 @@ namespace labyrinth
 
             mazeTrace.AppendText("Maze ready\n");
             mazeTrace.AppendText("Current position:" + mySolver.x + "," + mySolver.y + " brick nr " + startingBrickIndex + "\n");
-
-
 
             if (mySolver.x != bricks[exitBrickIndex].x && mySolver.y == bricks[exitBrickIndex].y)
             {
@@ -365,7 +359,6 @@ namespace labyrinth
 
                 }
 
-
                 //facing west cases
                 if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == Direction.West && bricks[currentBrickIndex - 1].upperWall == true)
                 {
@@ -380,7 +373,7 @@ namespace labyrinth
                     gObject.DrawEllipse(blackPen, recti);
                     mySolver.facingAt = Direction.West;
                 }
-                else if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == Direction.West && bricks[currentBrickIndex - 1].upperWall == false && bricks[currentBrickIndex -6].rightWall == false)
+                else if ((bricks[currentBrickIndex].upperWall == true || bricks[currentBrickIndex].bottomWall == true) && bricks[currentBrickIndex].leftWall == false && mySolver.facingAt == Direction.West && bricks[currentBrickIndex - 1].upperWall == false && bricks[currentBrickIndex - 6].rightWall == false)
                 {
                     recti.X = bricks[currentBrickIndex].x;
                     recti.Y = bricks[currentBrickIndex].y;
@@ -423,17 +416,10 @@ namespace labyrinth
                 }
 
                 mazeTrace.AppendText("Current position:" + mySolver.x + "," + mySolver.y + " brick nr " + currentBrickIndex + "\n");
-                Thread.Sleep(500);
+                await PutTaskDelay();
+
             }
             #endregion
-
-
-
-
-        }
-
-        private void canvas_Paint(object sender, PaintEventArgs e)
-        {
 
         }
 

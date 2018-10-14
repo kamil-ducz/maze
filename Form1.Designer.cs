@@ -28,28 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.canvas = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.solveMazeButton = new System.Windows.Forms.Button();
             this.mazeTrace = new System.Windows.Forms.RichTextBox();
             this.exitProgramButton = new System.Windows.Forms.Button();
+            this.canvas = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // canvas
+            // solveMazeButton
             // 
-            this.canvas.Location = new System.Drawing.Point(12, 42);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(552, 523);
-            this.canvas.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(570, 198);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(104, 75);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Draw and solve maze";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.solveMazeButton.Location = new System.Drawing.Point(570, 198);
+            this.solveMazeButton.Name = "solveMazeButton";
+            this.solveMazeButton.Size = new System.Drawing.Size(104, 75);
+            this.solveMazeButton.TabIndex = 1;
+            this.solveMazeButton.Text = "Draw and solve maze";
+            this.solveMazeButton.UseVisualStyleBackColor = true;
+            this.solveMazeButton.Click += new System.EventHandler(this.solveMazeButton_Click);
             // 
             // mazeTrace
             // 
@@ -70,6 +63,13 @@
             this.exitProgramButton.UseVisualStyleBackColor = true;
             this.exitProgramButton.Click += new System.EventHandler(this.exitProgramButton_Click);
             // 
+            // canvas
+            // 
+            this.canvas.Location = new System.Drawing.Point(12, 42);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(552, 523);
+            this.canvas.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -78,22 +78,20 @@
             this.ClientSize = new System.Drawing.Size(1272, 741);
             this.Controls.Add(this.exitProgramButton);
             this.Controls.Add(this.mazeTrace);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.solveMazeButton);
             this.Controls.Add(this.canvas);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel canvas;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button solveMazeButton;
         private System.Windows.Forms.RichTextBox mazeTrace;
         private System.Windows.Forms.Button exitProgramButton;
+        private System.Windows.Forms.Panel canvas;
     }
 }
 
