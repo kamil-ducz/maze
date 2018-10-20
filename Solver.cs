@@ -7,9 +7,9 @@ namespace labyrinth
     /// </summary>
     public class Solver
     {
-        public int x;
-        public int y;
-        public Direction facingAt = Direction.North;
+        public int x { get; set; }
+        public int y { get; set; }
+        public Direction facingAt { get; set; }
 
         public Solver(int x, int y)
         {

@@ -1,27 +1,22 @@
-﻿//represents single brick of maze
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace labyrinth
+﻿namespace labyrinth
 {
+    /// <summary>
+    ///represents single field of maze
+    /// </summary>
     public class Brick
     {
-        //center coordinates
-        public int x = 0;
-        public int y = 0;
-        public bool upperWall = false;
-        public bool bottomWall = false;
-        public bool leftWall = false;
-        public bool rightWall = false;
+        public int x { get; set; }
+        public int y { get; set; }
+        public bool upperWall { get; set; }
+        public bool bottomWall { get; set; }
+        public bool leftWall { get; set; }
+        public bool rightWall { get; set; }
 
         public Brick(int x, int y)
         {
             this.x = x;
             this.y = y;
         }
+
     }
 }
